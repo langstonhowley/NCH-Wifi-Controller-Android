@@ -1,0 +1,11 @@
+<!--
+  ~ Copyright (c) 2019. Nextek Power Systems.
+  ~ All rights reserved.
+  -->
+
+<resources>
+    <string name="app_name">NCH Wifi Controller</string>
+    <string name="test">Sample Data</string>
+    <string name="search_string">Searching For NCHs</string>
+    <string name="search_complete">Search Complete</string>
+</resources>

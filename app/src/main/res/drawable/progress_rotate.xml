@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019. Nextek Power Systems.
+  ~ All rights reserved.
+  -->
+
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:fromDegrees="0"
+    android:toDegrees="360">
+
+    <shape
+        android:shape="ring"
+        android:innerRadiusRatio="3"
+        android:thicknessRatio="16"
+        android:useLevel="false">
+
+        <size
+            android:width="40sp"
+            android:height="40sp" />
+
+        <gradient
+            android:type="sweep"
+            android:startColor="@android:color/transparent"
+            android:centerColor="@color/nextek_blue"
+            android:endColor="@color/nextek_green"
+            android:angle="256" />
+
+    </shape>
+</rotate>

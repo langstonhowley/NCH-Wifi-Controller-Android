@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019. Nextek Power Systems.
+  ~ All rights reserved.
+  -->
+
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+
+
+    <color name="trans_nextek_blue">#832B6EA8</color>
+    <color name="nextek_blue">#2B6EA8</color>
+    <color name="trans_nextek_green">#836DA14A</color>
+    <color name="nextek_green">#6DA14A</color>
+    <color name="turn_off_red">#E30000</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background_gray">#FF1f2123</color>
+    <color name="light_gray">#808080</color>
+
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019. Nextek Power Systems.
+  ~ All rights reserved.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Help"
+        android:id="@+id/help"
+        app:showAsAction="ifRoom"
+        android:visible="true"></item>
+    <item
+        android:id="@+id/disconnect"
+        android:icon="@mipmap/n_logo"
+        android:title="Disconnect"
+        app:showAsAction="always"
+        android:visible="false"></item>
+
+</menu>
