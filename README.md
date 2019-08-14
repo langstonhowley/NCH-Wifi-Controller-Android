@@ -21,7 +21,10 @@ bluetoothAdapter.startDiscovery();
 //Ending Discovery (manually)
 bluetoothAdapter.cancelDiscovery();
 ```
-When a device is found a ```BroadcastReceiver``` located in the [Main Activity Class](app/src/main/java/com/nextek/nchcontrol/MainActivity.java) is triggered.
+
+When a device search begins [this ```BroadcastReceiver```](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/MainActivity.java#L276) is triggered.
+
+When a device is found [this ```BroadcastReceiver```](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/MainActivity.java#L244) is triggered.
 
 ### Device Pairing (Bonding)
 
@@ -37,7 +40,7 @@ Device pairing is handled by this code (found [here](https://github.com/langston
 Method m = BluetoothDevice.class.getMethod("createBond", (Class[]) null);
 m.invoke(/* instance of the BluetoothDevice class */, (Object[]) null);
 ```
-When a device pairs or fails to pair a ```BroadcastReceiver``` located in the [Main Activity Class](app/src/main/java/com/nextek/nchcontrol/MainActivity.java) is triggered.
+When a device pairs or fails to pair [this ```BroadcastReceiver```](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/MainActivity.java#L317) is triggered. 
 
 ### Device Connection
 
@@ -49,4 +52,23 @@ BluetoothSocket bluetoothSocket =
       
 //Call the connect() method on that socket
 BluetoothSocket.class.getMethod("connect").invoke(bluetoothSocket);
+```
+When a device connects or fails to connect [this ```BroadcastReceiver```](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/MainActivity.java#L373) is triggered.
+
+### Message I/O
+
+Sending byte data through the serial port (found [here](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java#L136) in repo): 
+```java
+//Create an InputStream and an OutputStream from the connected BluetoothSocket
+InputStream inputStream = bluetoothSocket.getInputStream();
+OutputStream outputStream = bluetoothSocket.getOutputStream();
+
+//Reading bytes
+byte[] buffer = new byte[256]
+int bytesRead = inputStream.read(buffer) //Places bytesRead amount of bytes into
+                                         //buffer
+
+//Writing bytes
+outputStream.wirte("Hello World!".getBytes());
+outputStream.flush();
 ```
