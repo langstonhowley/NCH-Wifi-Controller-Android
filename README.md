@@ -10,49 +10,43 @@ Every Bluetooth event is handled by the [Bluetooth_Service Class](app/src/main/j
 
 ### Device Search
 
-Device searching is handled by this code (found in the [Bluetooth_Service Class](app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java)): 
+Device searching is handled by this code (found [here](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java#L185) in repo): 
 ```java
-public void search() {
-      Log.e(TAG, "search: Starting search", null);
-      ba.startDiscovery();
-}
+//Creating an instance of type BluetoothAdapter
+BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-public void stopSearch() {
-      Log.e(TAG, "stopSearch: Stopping Search", null);
-      ba.cancelDiscovery();
-}
+//Starting Discovery
+bluetoothAdapter.startDiscovery();
+
+//Ending Discovery (manually)
+bluetoothAdapter.cancelDiscovery();
 ```
 When a device is found a ```BroadcastReceiver``` located in the [Main Activity Class](app/src/main/java/com/nextek/nchcontrol/MainActivity.java) is triggered.
 
 ### Device Pairing (Bonding)
 
-Device pairing is handled by this code (found in the [Bluetooth_Service Class](app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java)): 
-```java
-public void pair() {
-        final boolean[] paired = {false};
-        try {
-            for (int i = 0; i < ba.getBondedDevices().size(); i++) {
-                if (gs.getDevice().equals(ba.getBondedDevices().toArray()[i])) {
-                    paired[0] = true;
-                    Log.e(TAG, "connect: Device already paired", null);
-                    connect();
-                }
-            }
-            if (!paired[0]) {
-                //PAIRING OCCURS HERE
-                Method m = BluetoothDevice.class.getMethod("createBond", (Class[]) null);
-                m.invoke(gs.getDevice(), (Object[]) null);
+The Android phone and NCH must be bonded before connection:
+> "Note: If the two devices have not been previously paired, then the Android framework automatically shows a pairing request notification or dialog to the user during the connection procedure, as shown in Figure 3..."
 
-                if (gs.getDevice().getBondState() == BluetoothDevice.BOND_BONDED) {
-                    Log.e(TAG, "pair: Device paired.", null);
-                    failed = false;
-                } else {
-                    Log.e(TAG, "pair: Device failed to pair", null);
-                }
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "pair: Exception triggered: ", e);
-        }
-    }
+(See the [Android SDK Bluetooth Overview](https://developer.android.com/guide/topics/connectivity/bluetooth#ConnectionTechniques) for more information about this.)
+
+Although a pairing request is shown automatically if the devices aren't paired, I chose to implement it to be explicit.
+
+Device pairing is handled by this code (found [here](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java#L197) in repo): 
+```java
+Method m = BluetoothDevice.class.getMethod("createBond", (Class[]) null);
+m.invoke(/* instance of the BluetoothDevice class */, (Object[]) null);
 ```
 When a device pairs or fails to pair a ```BroadcastReceiver``` located in the [Main Activity Class](app/src/main/java/com/nextek/nchcontrol/MainActivity.java) is triggered.
+
+### Device Connection
+
+Device connection is handled by this code (found [here](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java#L95) in repo): 
+```java
+//Create an RFCOMM Socket
+BluetoothSocket bluetoothSocket = 
+      /* instance of the BluetoothDevice class */.createRfcommSocketToServiceRecord(UUID.fromString(mUUID));
+      
+//Call the connect() method on that socket
+BluetoothSocket.class.getMethod("connect").invoke(bluetoothSocket);
+```
