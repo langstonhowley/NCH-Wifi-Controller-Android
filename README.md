@@ -4,6 +4,8 @@ This Android application allows users to connect to a Nextek NCH and toggle its 
 
 More specifically, a virtual serial port is made between the device and a user-selected NCH using the Bluetooth RFCOMM Protocol (more information on RFCOMM [here](https://en.wikipedia.org/wiki/List_of_Bluetooth_protocols#RFCOMM)). This allows for the user to toggle wifi by sending byte data through the serial port.
 
+To see the macOS X version of this application [click here](https://github.com/langstonhowley/NCH-Wifi-Controller-MacOs) .
+
 ## Bluetooth Handling
 
 Every Bluetooth event is handled by the [Bluetooth_Service Class](app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java). Important bluetooth events include:
@@ -26,6 +28,8 @@ When a device search begins [this ```BroadcastReceiver```](https://github.com/la
 
 When a device is found [this ```BroadcastReceiver```](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/MainActivity.java#L244) is triggered.
 
+---
+
 ### Device Pairing (Bonding)
 
 The Android phone and NCH must be bonded before connection:
@@ -42,6 +46,8 @@ m.invoke(/* instance of the BluetoothDevice class */, (Object[]) null);
 ```
 When a device pairs or fails to pair [this ```BroadcastReceiver```](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/MainActivity.java#L317) is triggered. 
 
+---
+
 ### Device Connection
 
 Device connection is handled by this code (found [here](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java#L95) in repo): 
@@ -54,6 +60,8 @@ BluetoothSocket bluetoothSocket =
 BluetoothSocket.class.getMethod("connect").invoke(bluetoothSocket);
 ```
 When a device connects or fails to connect [this ```BroadcastReceiver```](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/MainActivity.java#L373) is triggered.
+
+---
 
 ### Message I/O
 
