@@ -6,6 +6,8 @@ More specifically, a virtual serial port is made between the device and a user-s
 
 To see the macOS X version of this application [click here](https://github.com/langstonhowley/NCH-Wifi-Controller-MacOs) .
 
+To see the Windows 10 version of this application [click here](https://github.com/langstonhowley/NCH-Wifi-Controller-Windows10) .
+
 ## Bluetooth Handling
 
 Every Bluetooth event is handled by the [Bluetooth_Service Class](app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java). Important bluetooth events include:
@@ -65,7 +67,7 @@ When a device connects or fails to connect [this ```BroadcastReceiver```](https:
 
 ### Message I/O
 
-Sending byte data through the serial port (found [here](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java#L136) in repo): 
+Sending byte data through the socket using ```InputStream``` and ```OutputStream``` (found [here](https://github.com/langstonhowley/NCH-Wifi-Controller-Android/blob/db0c4b6ab6c7e8fd87adac0f9b1f345f157d6bff/app/src/main/java/com/nextek/nchcontrol/Bluetooth_Service.java#L136) in repo): 
 ```java
 //Create an InputStream and an OutputStream from the connected BluetoothSocket
 InputStream inputStream = bluetoothSocket.getInputStream();
